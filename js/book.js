@@ -16,10 +16,9 @@ export default class Book {
         bookLi.style.overflow = 'scroll';
         bookLi.style.display = 'flex';
         bookLi.style.marginLeft = '2px';
-        bookLi.style.background = 'white'
-
-        // bookLi.style.width = '100px';
-        // bookLi.style.height = '200px';
+        bookLi.style.background = 'white';
+        bookLi.style.display = 'flex';
+        bookLi.style.flexDirection = 'column';
 
         const liContent = document.createElement('ul');
 
@@ -52,28 +51,13 @@ export default class Book {
         // bookSubj.style.margin = '12px';
         bookSubj.style.listStyle = 'none';
 
+        //just creating the button, no functionality 
+        const favBtn = document.createElement('button');
+        favBtn.innerHTML = 'Add to favorites';
+
         liContent.append(bookTitle, bookAuth, bookLang, bookSubj);
-        bookLi.append(liContent)
+        bookLi.append(liContent, favBtn);
 
         return bookLi;
     }
 }
-
-
-/*
- {
-      author: ["Deihl, Edna Groff"],
-      language: "en",
-      subject: [
-        "Boys -- Juvenile fiction",
-        "Puppies -- Juvenile fiction",
-        "PZ",
-        "Pets -- Juvenile fiction",
-        "Circus -- Juvenile fiction",
-        "Human-animal relationships -- Juvenile fiction",
-        "Children and animals -- Juvenile fiction",
-        "Dogs -- Juvenile fiction",
-      ],
-      title: "My twin puppies",
-    },
-    */

@@ -3,32 +3,27 @@ import BookShelf from './js/bookshelf.js';
 import data from './js/bookData.js';
 
 console.log('hello from index.js')
+const shelfIns = new BookShelf();
 
-function renderBookShelf(books){
-    const shelfIns = new BookShelf([]);
-    for(const book of books){
+//seed functionality
+    for(const book of data){
         const bookIns = new Book(book.author, book.language, book.subject, book.title);
+        // console.log('book ins', bookIns);
         shelfIns.addBook(bookIns);
-    }
-    const shelfElm = shelfIns.render();
-    document.querySelector('#book_shelf').appendChild(shelfElm);
-}
+    } 
 
-renderBookShelf(data);
-/*
- {
-      author: ["Deihl, Edna Groff"],
-      language: "en",
-      subject: [
-        "Boys -- Juvenile fiction",
-        "Puppies -- Juvenile fiction",
-        "PZ",
-        "Pets -- Juvenile fiction",
-        "Circus -- Juvenile fiction",
-        "Human-animal relationships -- Juvenile fiction",
-        "Children and animals -- Juvenile fiction",
-        "Dogs -- Juvenile fiction",
-      ],
-      title: "My twin puppies",
-    },
-    */
+
+const all = document.querySelector('#all')
+const favs = document.querySelector('#favs')
+
+all.addEventListener('click', () => {
+    shelfIns.render();
+})
+
+favs.addEventListener('click', () =>{
+    shelfIns.renderFavorites();
+})
+
+//querySelectorAll the rendered books, then sort and re-render --> this works for favs and all
+
+

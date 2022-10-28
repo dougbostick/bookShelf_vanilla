@@ -18,7 +18,32 @@ footer {
     font-size: 38px;
     margin-top: 18px;
     background: gray;
-    opacity: .8;
+    /* opacity: .8; */
     padding: 14px;
     border-radius: 12px;
 }
+
+label {
+    background-color: white;
+}
+
+button, label, select {
+    font-size: 22px;
+    padding: 8px;
+    color: white;
+    background-color: gray;
+}
+
+button {
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+button:active{
+    background-color: white;
+    color: gray;
+}
+
+
+
+
