@@ -2,8 +2,8 @@ export default class Bookshelf {
     constructor(){
         this.books = [];
         this.favorites = [];
-        this.alpah = [];
-        this.topicsNum = [];
+        // this.alpah = [];
+        // this.topicsNum = [];
     }
     addBook(book){
         this.books.push(book);
@@ -13,8 +13,22 @@ export default class Bookshelf {
         this.favorites.push(book);
     }
 
-    renderAlpha(book){
-        this.books.sort(() => )
+    renderAlpha(){
+       //console.log('alpha', this.books)
+        this.books.sort((a, b) => {
+            if(a.title > b.title) return 1;
+            return -1;
+        })
+        // console.log('after sort', this.books)
+        this.render()
+    }
+
+    renderTopics(){
+        console.log(this.books)
+        this.books.sort((a, b) => {
+            if(a.subject.length > b.subject.length) return 1
+            return -1;
+        })
         this.render()
     }
 

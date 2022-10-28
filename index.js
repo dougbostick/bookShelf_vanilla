@@ -15,6 +15,8 @@ const shelfIns = new BookShelf();
 
 const all = document.querySelector('#all')
 const favs = document.querySelector('#favs')
+const select = document.querySelector('#dropdown')
+
 
 all.addEventListener('click', () => {
     shelfIns.render();
@@ -24,6 +26,17 @@ favs.addEventListener('click', () =>{
     shelfIns.renderFavorites();
 })
 
+select.addEventListener('change', ()=> {
+// console.log('select', select.value)
+if(select.value === 'alphabetical'){
+    console.log('select', select.value)
+    shelfIns.renderAlpha();
+}
+if(select.value === 'topics'){
+    console.log('select', select.value)
+    shelfIns.renderTopics();
+}
+})
 //querySelectorAll the rendered books, then sort and re-render --> this works for favs and all
 
 
