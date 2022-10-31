@@ -29,14 +29,22 @@ favs.addEventListener('click', () =>{
 select.addEventListener('change', ()=> {
 // console.log('select', select.value)
 if(select.value === 'alphabetical'){
-    console.log('select', select.value)
+    // console.log('select', select.value)
     shelfIns.renderAlpha();
 }
+if(select.value === 'reverse'){
+    // console.log('select', select.value)
+    shelfIns.renderReverse();
+}
 if(select.value === 'topics'){
-    console.log('select', select.value)
+    // console.log('select', select.value)
     shelfIns.renderTopics();
 }
 })
+
+
+
+
 //querySelectorAll the rendered books, then sort and re-render --> this works for favs and all
 
 

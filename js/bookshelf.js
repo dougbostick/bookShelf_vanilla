@@ -2,9 +2,8 @@ export default class Bookshelf {
     constructor(){
         this.books = [];
         this.favorites = [];
-        // this.alpah = [];
-        // this.topicsNum = [];
     }
+
     addBook(book){
         this.books.push(book);
     }
@@ -13,15 +12,30 @@ export default class Bookshelf {
         this.favorites.push(book);
     }
 
+    removeFav(book){
+       this.favorites = this.favorites.filter((favBook) => favBook !== book)
+       this.renderFavorites(); 
+    }
+
     renderAlpha(){
-       //console.log('alpha', this.books)
-        this.books.sort((a, b) => {
+      // console.log('alpha', this.books)
+        this.books.sort((a, b) => { 
             if(a.title > b.title) return 1;
             return -1;
         })
-        // console.log('after sort', this.books)
+       // console.log('after sort', this.books)
         this.render()
     }
+
+    renderReverse(){
+        // console.log('alpha', this.books)
+          this.books.sort((a, b) => { 
+              if(a.title < b.title) return 1;
+              return -1;
+          })
+         // console.log('after sort', this.books)
+          this.render()
+      }
 
     renderTopics(){
         console.log(this.books)
@@ -34,6 +48,7 @@ export default class Bookshelf {
 
     render(){
         const shelfUl = document.querySelector('#book_shelf'); //ul
+        //clear dom
         shelfUl.innerHTML = '';
         shelfUl.style.display = 'flex';
         shelfUl.style.flexWrap = 'wrap';
@@ -46,7 +61,11 @@ export default class Bookshelf {
         //grabbing button, adding functionality 
         const favBtn = bookIns.querySelector('button');
         favBtn.addEventListener('click', ()=> {
-              if(!this.favorites.includes(book)) this.addFav(book);
+              if(!this.favorites.includes(book)) {
+                this.addFav(book)
+            } else {
+                this.removeFav(book)
+            }
             console.log(book)
         })
         shelfUl.append(bookIns)
@@ -65,11 +84,15 @@ export default class Bookshelf {
 
         this.favorites.map((book) => {
             const bookIns = book.render();
-            // const favBtn = bookIns.querySelector('button');
-            // favBtn.addEventListener('click', ()=> {
-            //     this.addFav(book);
-            //     console.log(this.favorites)
-            // })
+            const favBtn = bookIns.querySelector('button');
+            favBtn.addEventListener('click', ()=> {
+                if(!this.favorites.includes(book)) {
+                  this.addFav(book)
+              } else {
+                  this.removeFav(book)
+              }
+              console.log(book)
+          })
             shelfUl.append(bookIns)
            })
 
@@ -78,6 +101,4 @@ export default class Bookshelf {
            footer.innerHTML = `You have: ${this.favorites.reduce((a, c) => a + 1, 0)} favorite ${count}`
     }
 
-//alphabetical render
-//topics render
 }
