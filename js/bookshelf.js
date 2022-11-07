@@ -132,6 +132,29 @@ export default class Bookshelf {
               }
               console.log(book)
           })
+
+          const showComments = bookIns.querySelector('.showCommentsBtn');
+        showComments.addEventListener('click', () => {
+            book.showComments = !book.showComments;
+            this.render()
+        })
+        if(book.showComments){
+            const commentForm = bookIns.querySelector('.commentForm');
+            commentForm.addEventListener('submit', (e) => {
+                console.log('comment form')
+                e.preventDefault();
+                console.log(e.target[0].value);
+                book.addComment(e.target[0].value);
+                // bookIns = book.render();
+                this.render()
+            })
+        }
+
+          const deleteBtn = bookIns.querySelector('.deleteBtn');
+          deleteBtn.addEventListener('click', () => {
+              // console.log('DELETE', book)
+              this.removeBook(book);
+          })
             shelfUl.append(bookIns)
            })
 
@@ -179,6 +202,12 @@ export default class Bookshelf {
                 this.render()
             })
         }
+
+        const deleteBtn = bookIns.querySelector('.deleteBtn');
+        deleteBtn.addEventListener('click', () => {
+            // console.log('DELETE', book)
+            this.removeBook(book);
+        })
       
         shelfUl.append(bookIns)
        })
