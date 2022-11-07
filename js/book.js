@@ -4,14 +4,22 @@ export default class Book {
         this.language = language;
         this.subject =  subject;
         this.title = title;
+        this.comments = [];
+        this.showComments = false;
+        //display = none
     }
+
+    addComment(comment){
+        this.comments.push(comment)
+    }
+
     render(){
         const bookLi = document.createElement('li');
         // bookLi.style.border = '5px solid black'
         bookLi.style.borderRadius = '5px';
         bookLi.style.boxShadow = `5px 5px  2px gray`
-        bookLi.style.width = '20%';
-        bookLi.style.height = '280px';
+        bookLi.style.width = '30%';
+        bookLi.style.height = '380px';
         bookLi.style.margin = '12px';
         bookLi.style.overflow = 'scroll';
         bookLi.style.display = 'flex';
@@ -21,6 +29,7 @@ export default class Book {
         bookLi.style.flexDirection = 'column';
 
         const liContent = document.createElement('ul');
+        liContent.style.fontSize = '22px'
 
         const bookTitle = document.createElement('li');
         bookTitle.innerHTML = `Title: ${this.title}`;
@@ -53,10 +62,53 @@ export default class Book {
 
         //just creating the button, no functionality 
         const favBtn = document.createElement('button');
+        favBtn.classList.add('favBtn')
         favBtn.innerHTML = 'Add to favorites';
+        favBtn.style.marginTop = '8px'
+
+        const  commentForm = document.createElement('form');   
+
+        const showCommentsBtn = document.createElement('button');
+        showCommentsBtn.classList.add('showCommentsBtn');
+        showCommentsBtn.innerHTML = 'Show Comments';
+        showCommentsBtn.style.marginTop = '8px'
+
+        const commentList = document.createElement('ul');
+        commentList.style.marginTop = '8px'
+
+        if(this.showComments) {
+            commentForm.classList.add('commentForm');
+            const commentText = document.createElement('textarea');
+            commentText.style.margin = '10px';
+            commentText.style.marginLeft = '20px';
+            commentText.rows = '5'
+            commentText.style.width = '85%'
+            commentText.style.fontSize = '22px'
+            commentText.style.padding = '8px'
+
+            const commentBtn = document.createElement('button');
+            commentBtn.setAttribute('type', 'submit');
+            commentBtn.innerHTML = 'Submit Comment';
+            commentForm.append(commentText, commentBtn);
+            showCommentsBtn.innerHTML = 'Hide Comments';
+             //load up comment list with comment li's 
+        this.comments.map((comment) => { // ['sick', 'i cried so hard after the end of the third chapter', 'i liked the pictures']
+            const commentElm = document.createElement('li'); // li
+            commentElm.style.fontSize = '22px'
+            commentElm.style.margin = '12px'
+
+            commentElm.innerHTML = comment; // <li>sick</li>
+            commentList.append(commentElm);
+        })
+        }
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = 'Remove Book';
+        deleteBtn.style.marginBottom = '8px';
+        deleteBtn.classList.add('deleteBtn');
 
         liContent.append(bookTitle, bookAuth, bookLang, bookSubj);
-        bookLi.append(liContent, favBtn);
+        bookLi.append(liContent, favBtn, showCommentsBtn, commentForm, commentList, deleteBtn);
 
         return bookLi;
     }

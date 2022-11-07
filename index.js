@@ -16,7 +16,34 @@ const shelfIns = new BookShelf();
 const all = document.querySelector('#all')
 const favs = document.querySelector('#favs')
 const select = document.querySelector('#dropdown')
+const addForm = document.querySelector('#add_form');
+// const searchBtn = document.querySelector('#search_btn')
+const searchInput = document.querySelector('#search_input')
 
+searchInput.addEventListener('input', ()=> {
+    shelfIns.search(searchInput.value);
+})
+
+// searchBtn.addEventListener('click', () => {
+//     // console.log(searchInput)
+//     shelfIns.search(searchInput.value);
+// })
+
+//form handler function 
+addForm.addEventListener('submit', (e) => {
+e.preventDefault();
+console.log('e', e)
+const title = e.target[0].value;
+const author = e.target[1].value;
+const language = e.target[2].value;
+const subjects = e.target[3].value.split(', ');
+// console.log(subjects)
+const bookToAdd = new Book(author, language, subjects, title);
+// console.log(bookToAdd)
+shelfIns.addBook(bookToAdd)
+shelfIns.render();
+addForm.reset()
+})
 
 all.addEventListener('click', () => {
     shelfIns.render();
